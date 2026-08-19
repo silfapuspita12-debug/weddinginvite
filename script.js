@@ -7,9 +7,18 @@ document.getElementById('guest-name').textContent = guestName;
 document.getElementById('open-btn').addEventListener('click', function () {
   document.getElementById('cover').classList.add('hidden');
   document.body.classList.add('opened');
-  document.querySelectorAll('.flower').forEach(function (f) {
-  f.classList.add('blooming');
+  document.querySelectorAll('.hero-penjor-wrap, .hero-joglo, .hero-content').forEach(function (wrap) {
+  wrap.classList.add('reveal');
 });
+});
+
+// Mulai goyang-goyang begitu animasi "buka" selesai
+document.querySelectorAll('.hero-penjor-wrap').forEach(function (wrap) {
+  wrap.addEventListener('transitionend', function (e) {
+    if (e.propertyName === 'transform') {
+      wrap.classList.add('swaying');
+    }
+  });
 });
 
 // Countdown ke tanggal pernikahan
@@ -32,7 +41,7 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic' });
+AOS.init({ duration: 900, once: false, mirror: true, easing: 'ease-out-cubic' });
 
 function escapeHtml(str) {
   const div = document.createElement('div');
