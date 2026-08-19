@@ -418,6 +418,13 @@ body.opened { overflow: auto; }
   }
 }
 
+.hero-content {
+    background: rgba(237, 225, 208, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px 16px;
+  }
+
 .hero-penjor-wrap.pinned,
 .hero-joglo.pinned {
   position: fixed;
