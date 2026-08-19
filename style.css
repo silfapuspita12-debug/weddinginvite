@@ -410,8 +410,11 @@ body.opened { overflow: auto; }
 }
 
 @media (max-width: 640px) {
+  .hero-penjor-wrap.left { left: -16vw; }
+  .hero-penjor-wrap.right { right: -16vw; }
   .hero-penjor {
-    max-width: 46vw;
+    max-height: 90vh;
+    max-width: 60vw;
   }
 }
 
