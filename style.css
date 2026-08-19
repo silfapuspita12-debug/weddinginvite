@@ -183,11 +183,13 @@ body.opened { overflow: auto; }
 
 .hero-penjor-wrap {
   position: absolute;
-  top: 0;
+  bottom: 0;
   z-index: 2;
   opacity: 0;
+  pointer-events: none;
   transition: transform 1.3s cubic-bezier(0.34, 1.2, 0.64, 1), opacity 1s ease;
 }
+
 .hero-penjor-wrap.left {
   left: 0;
   transform-origin: left center;
@@ -405,4 +407,57 @@ body.opened { overflow: auto; }
   background: var(--moss);
   border-color: var(--moss);
   color: var(--clay);
+}
+
+@media (max-width: 640px) {
+  .hero-penjor {
+    max-width: 46vw;
+  }
+}
+
+.hero-penjor-wrap.pinned,
+.hero-joglo.pinned {
+  position: fixed;
+}
+
+#hero.perspective-off {
+  perspective: none;
+}
+
+.music-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 500;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: var(--espresso);
+  color: var(--clay);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(51,36,26,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+.music-toggle.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.music-toggle .music-icon {
+  display: inline-block;
+  animation: spin 3s linear infinite;
+  animation-play-state: paused;
+}
+.music-toggle.playing .music-icon {
+  animation-play-state: running;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

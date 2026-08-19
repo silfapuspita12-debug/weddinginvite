@@ -10,6 +10,8 @@ document.getElementById('open-btn').addEventListener('click', function () {
   document.querySelectorAll('.hero-penjor-wrap, .hero-joglo, .hero-content').forEach(function (wrap) {
   wrap.classList.add('reveal');
 });
+document.getElementById('bg-music').play().catch(() => {});
+document.getElementById('music-toggle').classList.add('playing', 'visible');
 });
 
 // Mulai goyang-goyang begitu animasi "buka" selesai
@@ -17,6 +19,8 @@ document.querySelectorAll('.hero-penjor-wrap').forEach(function (wrap) {
   wrap.addEventListener('transitionend', function (e) {
     if (e.propertyName === 'transform') {
       wrap.classList.add('swaying');
+      document.getElementById('hero').classList.add('perspective-off');
+      document.querySelector('.hero-joglo').classList.add('pinned');
     }
   });
 });
