@@ -1,0 +1,306 @@
+:root {
+  --clay: #EDE1D0;
+  --clay-deep: #E4D5BE;
+  --espresso: #33241A;
+  --rust: #B14D2E;
+  --moss: #5F6B42;
+  --ochre: #D9A441;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--clay);
+  color: var(--espresso);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.display { font-family: 'Bricolage Grotesque', serif; }
+
+#cover {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: var(--clay);
+}
+
+.eyebrow {
+  letter-spacing: 0.25em;
+  font-size: 0.75rem;
+  color: var(--ochre);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+#cover h1 {
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  margin: 10px 0 24px;
+}
+
+#open-btn {
+  margin-top: 30px;
+  padding: 14px 34px;
+  border: none;
+  border-radius: 999px;
+  background: var(--rust);
+  color: var(--clay);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.flower { position: absolute; width: 100px; height: 100px; }
+.flower.tl { top: 16px; left: 16px; }
+
+.flower.tr { top: 16px; right: 16px; transform: scaleX(-1); }
+.flower.bl { bottom: 16px; left: 16px; transform: scaleY(-1); }
+.flower.br { bottom: 16px; right: 16px; transform: scale(-1,-1); }
+
+/* tiap kelopak disembunyikan & dikecilin dulu sebelum "mekar" */
+.petal, .petal-center {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  transform: scale(0) rotate(-30deg);
+}
+
+/* class "blooming" ini yang bikin dia keliatan & mekar */
+.flower.blooming .petal,
+.flower.blooming .petal-center {
+  animation: bloom 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* delay beda-beda tiap kelopak → efek "mekar satu-satu" */
+.flower.blooming .petal:nth-of-type(1) { animation-delay: 0s; }
+.flower.blooming .petal:nth-of-type(2) { animation-delay: 0.05s; }
+.flower.blooming .petal:nth-of-type(3) { animation-delay: 0.10s; }
+.flower.blooming .petal:nth-of-type(4) { animation-delay: 0.15s; }
+.flower.blooming .petal:nth-of-type(5) { animation-delay: 0.20s; }
+.flower.blooming .petal-center { animation-delay: 0.30s; }
+
+@keyframes bloom {
+  0%   { opacity: 0; transform: scale(0) rotate(-30deg); }
+  60%  { opacity: 1; transform: scale(1.18) rotate(6deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+}
+
+.couple-name {
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.ampersand { color: var(--rust); font-style: italic; }
+
+.divider {
+  width: 64px;
+  height: 2px;
+  background: var(--moss);
+  margin: 20px auto;
+  opacity: 0.55;
+}
+
+.wedding-date { font-size: 1rem; opacity: 0.75; }
+
+body { overflow: hidden; }
+body.opened { overflow: auto; }
+
+#cover {
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+#cover.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.section {
+  padding: 100px 24px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.center { text-align: center; }
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+.count-box {
+  background: rgba(255,255,255,0.45);
+  border: 1px solid rgba(51,36,26,0.15);
+  border-radius: 14px;
+  padding: 20px 18px;
+  min-width: 84px;
+}
+.count-box .number {
+  font-family: 'Bricolage Grotesque', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--rust);
+}
+.count-box .label {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin-top: 4px;
+}
+
+.section-alt { background: var(--clay-deep); }
+
+.event-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+@media (min-width: 640px) {
+  .event-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.event-card {
+  background: var(--clay);
+  border: 1px solid rgba(51,36,26,0.12);
+  border-radius: 18px;
+  padding: 32px 24px;
+  text-align: center;
+}
+.event-card h3 { font-family: 'Bricolage Grotesque', serif; font-size: 1.3rem; margin-bottom: 10px; }
+.event-card .time { color: var(--rust); font-weight: 600; margin: 10px 0; }
+.event-card .loc { font-size: 0.85rem; opacity: 0.75; margin-bottom: 18px; line-height: 1.6; }
+
+.btn-outline {
+  display: inline-block;
+  padding: 10px 22px;
+  border: 1.5px solid var(--moss);
+  border-radius: 999px;
+  color: var(--moss);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.timeline {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+.timeline-item { max-width: 480px; }
+.timeline-item.right { margin-left: auto; text-align: right; }
+.timeline-item .year { color: var(--ochre); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.1em; }
+.timeline-item h4 { font-family: 'Bricolage Grotesque', serif; font-size: 1.2rem; margin: 6px 0 8px; }
+.timeline-item p { font-size: 0.9rem; line-height: 1.7; opacity: 0.8; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 40px;
+}
+@media (min-width: 640px) {
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.4s ease;
+}
+.gallery-grid img:hover {
+  transform: scale(1.04);
+}
+
+.rsvp-subtitle { opacity: 0.75; font-size: 0.9rem; margin-top: 8px; }
+
+.rsvp-form {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+.rsvp-form label { font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; display: block; }
+.rsvp-form input[type="text"], .rsvp-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(51,36,26,0.2);
+  background: rgba(255,255,255,0.5);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.9rem;
+}
+.rsvp-form textarea { min-height: 90px; resize: vertical; }
+
+.radio-group { display: flex; gap: 20px; }
+.radio-group label { display: flex; align-items: center; gap: 6px; font-weight: 500; }
+
+.wish-list { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; text-align: left; }
+.wish-item { background: rgba(255,255,255,0.5); border-radius: 12px; padding: 14px 16px; }
+.wish-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.badge { font-size: 0.65rem; padding: 3px 10px; border-radius: 999px; font-weight: 600; }
+.badge-hadir { background: rgba(95,107,66,0.18); color: var(--moss); }
+.badge-tidak { background: rgba(177,77,46,0.15); color: var(--rust); }
+.wish-item p { font-size: 0.85rem; opacity: 0.8; }
+#wish-empty { font-size: 0.85rem; opacity: 0.6; text-align: center; }
+
+.gift-subtitle { max-width: 480px; margin: 12px auto 0; font-size: 0.9rem; line-height: 1.7; opacity: 0.75; }
+
+.gift-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+@media (min-width: 640px) {
+  .gift-grid { grid-template-columns: 1fr 1fr; }
+}
+.gift-card {
+  background: var(--clay);
+  border: 1px solid rgba(51,36,26,0.12);
+  border-radius: 18px;
+  padding: 32px 24px;
+  text-align: center;
+}
+.gift-card .bank-name { font-size: 1.1rem; margin-bottom: 12px; }
+.gift-card .account-number {
+  font-family: 'Bricolage Grotesque', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--rust);
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.gift-card .account-holder { font-size: 0.85rem; opacity: 0.7; margin-bottom: 22px; }
+
+.copy-btn {
+  background: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.copy-btn.copied {
+  background: var(--moss);
+  border-color: var(--moss);
+  color: var(--clay);
+}
