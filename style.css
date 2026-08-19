@@ -419,8 +419,8 @@ body.opened { overflow: auto; }
 }
 
 .hero-content {
-    background: rgba(237, 225, 208, 0.85);
-    backdrop-filter: blur(10px);
+    background: rgba(237, 225, 208, 0.30);
+    backdrop-filter: blur(5px);
     border-radius: 20px;
     padding: 20px 16px;
   }
